@@ -1,0 +1,44 @@
+<h3>Listado de tareas</h3>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Descripción</th>
+            <th scope="col">Creador</th>
+            <th scope="col">Estado</th>
+            <th scope="col" class="text-center">Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let tarea of listaTareas" [class.table-success]="tarea.estado===1"
+            [class.table-danger]="tarea.estado===0">
+            <th scope="row">{{tarea.id}}</th>
+            <th class="fw-normal">{{tarea.nombre}}</th>
+            <th class="fw-normal">{{tarea.descripcion}}</th>
+            <th class="fw-normal">{{tarea.creador}}</th>
+            <th *ngIf="tarea.estado===0" class="fw-normal">
+                <span>Pendiente</span>
+            </th>
+            <th *ngIf="tarea.estado===1" class="fw-normal">
+                <span >Completada</span>
+            </th>
+            <th class="text-center">
+                <button (click)="cambiarEstado(tarea.id)" [ngClass]="getClass(this.tarea.estado)" title="Cambiar el estado de la tarea" type="button" class="btn me-2 btn-sm">
+                    Cambiar estado
+                </button>
+
+                <button (click)="update(tarea.id)" title="Modificar información de la tarea" type="button" class="btn btn-primary btn-sm pt-0">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-pencil-square" viewBox="0 0 16 16">
+                        <path
+                            d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z" />
+                        <path fill-rule="evenodd"
+                            d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z" />
+                    </svg>
+                </button>
+            </th>
+        </tr>
+    </tbody>
+</table>
